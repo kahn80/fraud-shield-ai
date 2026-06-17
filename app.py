@@ -17,17 +17,17 @@ print(f"✅ Loaded {len(df):,} transactions")
 
 # Prepare data
 print("\n🔧 Preparing data...")
-X = df.drop('Class', axis=1)
+X = df.drop('Class', axis=1)  # ALL 30 features
 y = df['Class']
 
 # Split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 print(f"✅ Training: {len(X_train):,} | Testing: {len(X_test):,}")
 
-# Scale ALL features
+# Scale ALL features (30 features)
 print("\n📊 Scaling ALL 30 features...")
 scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
+X_train_scaled = scaler.fit_transform(X_train)  # Trains on ALL 30 features
 X_test_scaled = scaler.transform(X_test)
 
 # Train
@@ -47,7 +47,7 @@ print(classification_report(y_test, y_pred))
 # Save
 print("\n💾 Saving model and scaler...")
 joblib.dump(model, 'fraud_model.pkl')
-joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(scaler, 'scaler.pkl')  # Saves scaler trained on ALL 30 features
 print("✅ Model saved as 'fraud_model.pkl'")
 print("✅ Scaler saved as 'scaler.pkl'")
 
